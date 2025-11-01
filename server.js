@@ -16,7 +16,7 @@ const static = require("./routes/static")
 View Engine and Templates
  * Routes
  *************************/
-app.use(require("./routes/statis"))
+
 // Index route
 app.get("/", function (req, res) {
   res.render("index", {title: "Home"})
