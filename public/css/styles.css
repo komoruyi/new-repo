@@ -4,3 +4,277 @@
 *:after {
   box-sizing: border-box;
 }
+/* styles.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Literata:opsz@7..72&display=swap");
+
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-background: #fff;
+  --main-accent: #01b0d3;
+  --body-font: Inter;
+  --primary-text: #242333;
+}
+
+body {
+  font-family: var(--body-font), sans-serif;
+  margin: 0;
+}
+
+#wrapper {
+  width: 95%;
+  background-color: var(--primary-background);
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 1em;
+}
+
+/* BEGIN header.ejs styles */
+header > img {
+  max-width: 40%;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--primary-text);
+  display: inline-block;
+  padding: 2vh 0;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.siteName {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+#tools {
+  font-size: 3.5vw;
+  font-variant: small-caps;
+  display: flex;
+  justify-content: space-evenly;
+}
+/* END header.ejs styles *//*********************/
+
+/* BEGIN navigation.ejs style */
+nav {
+  background-color: var(--primary-text);
+  color: var(--primary-background);
+}
+
+nav ul {
+  display: flex;
+  padding: 0 1vw;
+  justify-content: space-around;
+}
+
+nav li {
+  list-style: none;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/* END navigation.ejs style */
+
+/* BEGIN footer.ejs style */
+footer {
+  margin-top: 2rem;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+hr {
+  border: 2px solid var(--primary-text);
+  margin: 0;
+}
+/* END footer.ejs style */
+
+/* BEGIN index.ejs styles */
+img {
+  max-width: 100%;
+}
+
+h1,
+h2 {
+  font-size: 1.2em;
+  font-family: var(--heading-font), serif;
+}
+
+#hero {
+  background-image: url("/images/vehicles/delorean.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+#hero h2 {
+  margin-left: 0;
+}
+
+#hero a:hover {
+  opacity: 0.5;
+}
+
+#hero li {
+  list-style: none;
+  color: var(--main-accent);
+}
+
+#hero li h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--main-accent);
+}
+
+#hero ul {
+  padding-left: 0;
+  margin-top: 0;
+  max-width: 200px;
+  margin-left: 0.5em;
+  margin-bottom: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+#hero li {
+  font-size: 0.85em;
+}
+
+#actionbtn {
+  display: inline-block;
+  max-width: 25vw;
+  padding: 0.5rem;
+  background-color: var(--main-accent);
+  color: var(--primary-text);
+  font-weight: 800;
+  border-radius: 0.25rem;
+  font-size: 12px;
+}
+
+#actionbtn:hover {
+  opacity: 0.5;
+}
+
+/* For Delorian list */
+section ul {
+  padding: 0 0 0 1rem;
+}
+
+#review li {
+  font-size: 0.9em;
+  margin-bottom: 1em;
+}
+
+.flex {
+  display: flex;
+  margin-bottom: 2em;
+  justify-content: center;
+  width: 100%;
+  padding-left: 0.25em;
+}
+
+.flex a {
+  width: 100%;
+}
+
+.add-col {
+  background-color: var(--main-accent);
+  height: 5.5em;
+  width: 95%;
+  border: var(--primary-text) solid 1px;
+}
+
+a figure {
+  margin: 0;
+}
+
+figure img {
+  display: block;
+  margin: auto;
+  padding-top: 0.5em;
+}
+
+figure figcaption {
+  text-align: center;
+}
+
+section {
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+/* END index.ejs styles */
+
+@media only screen and (min-width: 768px) {
+  body {
+    background-image: linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(45deg, #000 25%, #fff 25%);
+    background-size: 100px 100px;
+    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+  }
+
+  #wrapper {
+    border: 5px solid var(--main-accent);
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 1vw;
+    width: 75vw;
+    max-width: 1200px;
+  }
+
+  /* BEGIN header.ejs styles */
+  #tools {
+    font-size: inherit;
+  }
+  /* END header.ejs styles */
+
+  /* BEGIN navigation.ejs style */
+  nav {
+    margin-top: 0.75rem;
+  }
+
+  nav ul {
+    justify-content: space-evenly;
+    padding: 0.5rem 0;
+    margin: 0;
+  }
+
+  nav li {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  /* END navigation.ejs style */
+
+  /* BEGIN index.ejs styles */
+  #hero ul {
+    font-size: 1.6em;
+    margin-left: 2em;
+    margin-top: 1em;
+  }
+
+  #actionbtn {
+    display: block;
+    width: 90%;
+    margin-top: 1.5em;
+    background-color: var(--main-accent);
+    color: var(--primary-text);
+    font-weight: 800;
+    font-size: large;
+  }
+  /* END index.ejs styles */
+}
