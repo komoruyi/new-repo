@@ -10,7 +10,7 @@
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "name": "fcyare7",
+            "name": "render.com",
             "connectString": "postgresql://cse340_ggj:FETsjNrtQ7iCWlDfa4IbK651IbheEVJc@dpg-d47ivqer433s739hlhk0-a.frankfurt-postgres.render.com/cse340_ggj"
         }
     ]
