@@ -4,499 +4,297 @@
 *:after {
   box-sizing: border-box;
 }
-
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f4f4f4;
+:root {
+  --primary-background: #fff;
+  --main-accent: #01b0d3;
+  --body-font: Inter;
+  --primary-text: #242333;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
 
-a {
-  text-decoration: none;
-  color: inherit;
+body{
+  font-family: "Roboto", sans-serif;
 }
-
-ul {
-  list-style: none;
-}
-
-/* ===================================
-   Container & Layout
-   =================================== */
-.container {
-  width: 100%;
-  max-width: 1200px;
+header, nav, main,footer{
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 15px;
 }
 
-/* ===================================
-   Header Styles
-   =================================== */
-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-  padding: 20px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+#wrapper {
+    width: 95%;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1em;
 }
-
-header .container {
+header{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+nav{
+  background-color: #201f1f;
+  width: 100%;
+}
+.siteName a{
+  text-decoration: none;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+#tools a{
+  text-decoration: none;
+  color: #333;
+  
+}
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  padding: 0.6rem;
+  list-style: none;
   align-items: center;
 }
 
-header h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
+nav ul li a{
+  text-decoration: none;
+  color: #fbf9f9;
+  cursor: pointer;
 }
 
-.tools a {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+nav ul li a:hover{
+  color: #ffe208;
 }
 
-.tools a:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+h1, h2{
+  font-size: 1.2rem;
+}
+.hero h1{
+  font-size: 1.4rem;
 }
 
-/* Navigation Styles */
-nav {
-  background-color: #2c3e50;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-ul {
+#hero{
+  background-image: url(/images/vehicles/delorean.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-wrap: wrap;
+}
+
+#hero h2 {
+  margin-left: 0;
+}
+
+#hero a:hover {
+  opacity: 0.5;
+}
+
+#hero li {
+  list-style: none;
+  color: var(--main-accent);
+}
+
+#hero li h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--main-accent);
+}
+
+#hero ul {
+  padding-left: 0;
+  margin-top: 0;
+  max-width: 200px;
+  margin-left: 0.5em;
+  margin-bottom: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+#hero li {
+  font-size: 0.85em;
+}
+
+#actionbtn {
+  display: inline-block;
+  max-width: 25vw;
+  padding: 0.5rem;
+  background-color: var(--main-accent);
+  color: var(--primary-text);
+  font-weight: 800;
+  border-radius: 0.25rem;
+  font-size: 12px;
+}
+
+#actionbtn:hover {
+  opacity: 0.5;
+}
+
+/* For Delorian list */
+section ul {
+  padding: 0 0 0 1rem;
+}
+
+#review li {
+  font-size: 0.9em;
+  margin-bottom: 1em;
+}
+
+.flex {
+  display: flex;
+  margin-bottom: 2em;
   justify-content: center;
+  width: 100%;
+  padding-left: 0.25em;
 }
 
-ul li {
-  flex: 1 1 auto;
-  text-align: center;
-}
-
-ul a {
-  display: block;
-  color: #ecf0f1;
-  padding: 15px 20px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-ul a:hover,
-ul a.active {
-  background-color: #34495e;
-}
-
-/* Main Content */
-main {
-  padding: 30px 0;
-  min-height: calc(100vh - 200px);
-}
-
-/*Hero Section*/
-.hero-section {
-  background: linear-gradient(to right, #e0e0e0, #f5f5f5);
-  border: 10px solid #000;
-  border-image: repeating-linear-gradient(
-    45deg,
-    #000,
-    #000 20px,
-    #fff 20px,
-    #fff 40px
-  ) 10;
-  padding: 30px 20px;
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #00d4ff 0%, #0099ff 100%);
-}
-
-.hero-content h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.featured-vehicle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.vehicle-info {
-  text-align: center;
-}
-
-.vehicle-title {
-  font-size: 1.8rem;
-  color: #00bcd4;
-  margin-bottom: 15px;
-}
-
-.vehicle-features {
-  font-size: 1.1rem;
-  color: #00bcd4;
-  margin-bottom: 20px;
-  line-height: 1.8;
-}
-
-.vehicle-image img {
-  max-width: 500px;
+.flex a {
   width: 100%;
 }
 
-.btn-primary {
-  display: inline-block;
-  background-color: #00bcd4;
-  color: #fff;
-  padding: 12px 30px;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+.add-col {
+  background-color: var(--main-accent);
+  height: 5.5em;
+  width: 95%;
+  border: var(--primary-text) solid 1px;
 }
 
-.btn-primary:hover {
-  background-color: #0097a7;
-  transform: translateY(-2px);
-}
-
-/* Upgrades & Reviews Section */
-.upgrades-reviews {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.upgrades-section h3,
-.reviews-section h3 {
-  font-size: 1.5rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 10px;
-}
-
-/* Upgrades Grid */
-.upgrades-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-/* Inventory Display Grid */
-#inv-display {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  padding: 0;
+a figure {
   margin: 0;
 }
 
-#inv-display li {
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#inv-display li:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-#inv-display a {
+figure img {
   display: block;
-  color: inherit;
-  text-decoration: none;
+  margin: auto;
+  padding-top: 0.5em;
 }
 
-#inv-display img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-#inv-display .namePrice {
-  padding: 15px;
-}
-
-#inv-display .namePrice hr {
-  margin: 0 0 15px 0;
-  border: 1px solid #ddd;
-}
-
-#inv-display h2 {
-  font-size: 1.3rem;
-  color: #2c3e50;
-  margin: 0 0 10px 0;
-}
-
-#inv-display h2 a {
-  color: #00bcd4;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-#inv-display h2 a:hover {
-  color: #0097a7;
-  text-decoration: underline;
-}
-
-#inv-display span {
-  font-size: 1.2rem;
-  color: #00bcd4;
-  font-weight: 600;
-}
-
-.upgrade-item {
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.upgrade-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.upgrade-item a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  background-color: #00bcd4;
-}
-
-.upgrade-item img {
-  width: 100%;
-  height: 120px;
-  object-fit: contain;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.upgrade-item span {
-  color: #fff;
-  font-weight: 600;
+figure figcaption {
   text-align: center;
 }
 
-/* Reviews List */
-.reviews-section {
-  background-color: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+section {
+  margin-bottom: 2em;
+  margin-top: 1em;
 }
 
-.reviews-list {
-  list-style: disc;
-  padding-left: 25px;
+
+section{
+  margin-bottom: 2em;
+  margin-top: 1em;
 }
 
-.reviews-list li {
-  color: #555;
-  margin-bottom: 12px;
-  font-size: 1rem;
-  line-height: 1.6;
+#inv-display {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ===================================
-   Vehicle Detail View Styles
-   =================================== */
-.detail-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  background-color: #fff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+#inv-display li {
+    margin-bottom: .5em;
+    border: 1px #ccc solid;
+    list-style-type: none;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+#inv-display li img {
+    object-fit: fill;
+}
+image{
+  max-width: 100%;
+}
+
+hr {
+    border: 2px solid #242333;
+    margin: 0;
+}
+
+
+#detail-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
 .detail-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
 }
 
-.detail-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+#detail-view h1 {
+  text-align: left;
+  margin-bottom: 1rem;
 }
 
-.detail-content {
-  flex: 1;
-}
 
-.detail-content h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.detail-content p {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 15px;
-  line-height: 1.8;
-}
-
-.detail-content strong {
-  color: #00bcd4;
-  font-weight: 600;
-}
-
-/* ===================================
-   Footer Styles
-   =================================== */
-footer {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  text-align: center;
-  padding: 20px 0;
-  margin-top: 40px;
-}
-
-footer p {
-  font-size: 0.9rem;
-}
-
-/* ===================================
-   Media Queries - Tablet & Desktop
-   =================================== */
-@media screen and (min-width: 768px) {
-  header h1 {
-    font-size: 2.5rem;
+@media only screen and (min-width: 768px){
+  body {
+        background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, #fff 25%);
+        background-size: 100px 100px;
+        background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+    }
+        #wrapper {
+        border: 5px solid #01b0d3;
+        border-radius: 10px;
+        margin-top: 1rem;
+        padding: 1vw;
+        width: 75vw;
+        max-width: 1200px;
+    }
+    #hero ul {
+    font-size: 1.6em;
+    margin-left: 2em;
+    margin-top: 1em;
   }
 
-  .nav-list {
-    justify-content: flex-start;
+  #actionbtn {
+    display: block;
+    width: 90%;
+    margin-top: 1.5em;
+    background-color: var(--main-accent);
+    color: var(--primary-text);
+    font-weight: 800;
+    font-size: large;
   }
 
-  .nav-list li {
-    flex: 0 1 auto;
+  #inv-display{
+    flex-flow: row wrap;
+    justify-content: space-evenly;
   }
-
-  .hero-content h2 {
-    font-size: 2.5rem;
+  #inv-display li {
+        max-width: 200px;
+        flex: 1 0 auto;
+        text-align: center;
+        height: 250px;
+        display: grid;
+        border-radius: 10px
   }
-
-  .featured-vehicle {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  
+  #inv-display a{
+    height: 150px;
   }
+    #inv-display h2 {
+        font-size: 1rem;
+    }
+      #inv-display img {
+        border-radius: 10px 10px;
+    }
 
-  .vehicle-info {
-    text-align: left;
-    flex: 1;
-  }
+    #inv-display div {
+        width: 100%;
+        height: 100px;
+    }
 
-  .vehicle-image {
-    flex: 1;
-  }
-
-  #inv-display {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .upgrades-reviews {
-    flex-direction: row;
-    gap: 40px;
-  }
-
-  .upgrades-section,
-  .reviews-section {
-    flex: 1;
-  }
-
-  .upgrades-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .detail-container {
-    flex-direction: row;
-    align-items: flex-start;
+  #detail-container {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
   }
 
   .detail-image {
-    flex: 0 1 45%;
+    width: 100%;
   }
-
-  .detail-content {
-    flex: 0 1 55%;
   }
-}
-
-@media screen and (min-width: 1024px) {
-  .upgrades-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  #inv-display {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* ===================================
-   Accessibility & Focus Styles
-   =================================== */
-a:focus,
-button:focus {
-  outline: 3px solid #667eea;
-  outline-offset: 2px;
-}
-
-/* Skip to main content link */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #667eea;
-  color: white;
-  padding: 8px;
-  text-decoration: none;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  top: 0;
-}

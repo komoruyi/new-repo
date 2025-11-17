@@ -1,11 +1,33 @@
-<!-- The Content Heading -->
+<h1>
+    <%= vehicle.inv_year %>
+        <%= vehicle.inv_make %>
+            <%= vehicle.inv_model %>
+</h1>
 
-<% if (title) { %>
-<h1><%= title %></h1>
-<% } else {
-  res.redirect('/')
-} %>
+<div id="detail-container">
+    <img src="<%= vehicle.inv_image %>" alt="<%= title %>" class="detail-image">
 
-<!-- Vehicle Detail Display -->
+    <div id="detail-info">
+        <h2>
+            <%= vehicle.inv_make %>
+                <%= vehicle.inv_model %> Details
+        </h2>
+        <p><strong>Price:</strong>
+            $<%= vehicle.inv_price.toLocaleString("en-US") %>
+        </p>
 
-<%- detail %>
+        <p><strong>Description:</strong></p>
+        <p>
+            <%= vehicle.inv_description %>
+        </p>
+
+        <p><strong>Color:</strong>
+            <%= vehicle.inv_color %>
+        </p>
+
+        <p><strong>Mileage:</strong>
+            <%= vehicle.inv_miles.toLocaleString() %>
+        </p>
+
+    </div>
+</div>
