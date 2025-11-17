@@ -4,51 +4,61 @@
 *:after {
   box-sizing: border-box;
 }
+
 :root {
   --primary-background: #fff;
   --main-accent: #01b0d3;
-  --body-font: Inter;
+  --body-font: "Inter", "Roboto", Arial, sans-serif;
   --primary-text: #242333;
 }
 
-
-body{
-  font-family: "Roboto", sans-serif;
+body {
+  font-family: var(--body-font);
+  background: var(--primary-background);
+  color: var(--primary-text);
+  margin: 0;
+  padding: 0;
 }
-header, nav, main,footer{
+
+/* Layout containers */
+header, nav, main, footer {
   max-width: 1000px;
   margin: 0 auto;
 }
 
 #wrapper {
-    width: 95%;
-    background-color: #fff;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 1em;
+  width: 95%;
+  background-color: var(--primary-background);
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 1em;
 }
-header{
+
+/* Header */
+header {
   display: flex;
   justify-content: space-around;
 }
 
-nav{
+nav {
   background-color: #201f1f;
   width: 100%;
 }
-.siteName a{
+
+.siteName a {
   text-decoration: none;
   color: #000;
   font-size: 1.5rem;
   font-weight: bolder;
 }
 
-#tools a{
+#tools a {
   text-decoration: none;
   color: #333;
-  
 }
-nav ul{
+
+/* Navigation */
+nav ul {
   display: flex;
   justify-content: space-around;
   padding: 0.6rem;
@@ -56,24 +66,28 @@ nav ul{
   align-items: center;
 }
 
-nav ul li a{
+nav ul li a {
   text-decoration: none;
   color: #fbf9f9;
   cursor: pointer;
+  transition: color .2s;
 }
 
-nav ul li a:hover{
+nav ul li a:hover {
   color: #ffe208;
 }
 
-h1, h2{
+/* Headings */
+h1, h2 {
   font-size: 1.2rem;
 }
-.hero h1{
+
+.hero h1 {
   font-size: 1.4rem;
 }
 
-#hero{
+/* Hero Section */
+#hero {
   background-image: url(/images/vehicles/delorean.jpg);
   background-repeat: no-repeat;
   background-position: center;
@@ -91,17 +105,6 @@ h1, h2{
   opacity: 0.5;
 }
 
-#hero li {
-  list-style: none;
-  color: var(--main-accent);
-}
-
-#hero li h2 {
-  margin-top: 0;
-  margin-bottom: 0;
-  color: var(--main-accent);
-}
-
 #hero ul {
   padding-left: 0;
   margin-top: 0;
@@ -112,7 +115,15 @@ h1, h2{
 }
 
 #hero li {
+  list-style: none;
+  color: var(--main-accent);
   font-size: 0.85em;
+}
+
+#hero li h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--main-accent);
 }
 
 #actionbtn {
@@ -124,39 +135,49 @@ h1, h2{
   font-weight: 800;
   border-radius: 0.25rem;
   font-size: 12px;
+  cursor: pointer;
+  transition: opacity .2s;
 }
 
 #actionbtn:hover {
   opacity: 0.5;
 }
 
-/* For Delorian list */
+/* List Styling */
 section ul {
   padding: 0 0 0 1rem;
 }
 
+/* Reviews */
 #review li {
   font-size: 0.9em;
   margin-bottom: 1em;
 }
 
+/* Add-ons Flex */
 .flex {
   display: flex;
   margin-bottom: 2em;
   justify-content: center;
   width: 100%;
   padding-left: 0.25em;
+  gap: 1em; /* Added spacing */
 }
 
 .flex a {
   width: 100%;
 }
 
+/* Add-on Column */
 .add-col {
   background-color: var(--main-accent);
   height: 5.5em;
   width: 95%;
-  border: var(--primary-text) solid 1px;
+  border: 1px solid var(--primary-text);
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a figure {
@@ -167,6 +188,9 @@ figure img {
   display: block;
   margin: auto;
   padding-top: 0.5em;
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 0.5em;
 }
 
 figure figcaption {
@@ -178,40 +202,50 @@ section {
   margin-top: 1em;
 }
 
-
-section{
-  margin-bottom: 2em;
-  margin-top: 1em;
-}
-
+/* Inventory Display */
 #inv-display {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 #inv-display li {
-    margin-bottom: .5em;
-    border: 1px #ccc solid;
-    list-style-type: none;
-    flex: 1 1 auto;
-    text-align: center;
+  margin-bottom: .5em;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  flex: 1 1 auto;
+  text-align: center;
+  border-radius: 10px;
+  height: auto;
 }
 
 #inv-display li img {
-    object-fit: fill;
-}
-image{
+  object-fit: fill;
   max-width: 100%;
+  border-radius: 10px;
 }
 
+#inv-display h2 {
+  font-size: 1rem;
+}
+
+#inv-display div {
+  width: 100%;
+  height: 100px;
+}
+
+#inv-display a {
+  height: 150px;
+}
+
+/* Horizontal rule */
 hr {
-    border: 2px solid #242333;
-    margin: 0;
+  border: 2px solid var(--primary-text);
+  margin: 0;
 }
 
-
+/* Vehicle Details */
 #detail-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -230,22 +264,24 @@ hr {
   margin-bottom: 1rem;
 }
 
-
+/* --- Responsive Styles --- */
 @media only screen and (min-width: 768px){
   body {
-        background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, #fff 25%);
-        background-size: 100px 100px;
-        background-position: 0 0, 0 0, -50px -50px, 50px 50px;
-    }
-        #wrapper {
-        border: 5px solid #01b0d3;
-        border-radius: 10px;
-        margin-top: 1rem;
-        padding: 1vw;
-        width: 75vw;
-        max-width: 1200px;
-    }
-    #hero ul {
+    background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, #fff 25%);
+    background-size: 100px 100px;
+    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+  }
+
+  #wrapper {
+    border: 5px solid var(--main-accent);
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 1vw;
+    width: 75vw;
+    max-width: 1200px;
+  }
+
+  #hero ul {
     font-size: 1.6em;
     margin-left: 2em;
     margin-top: 1em;
@@ -261,33 +297,21 @@ hr {
     font-size: large;
   }
 
-  #inv-display{
+  #inv-display {
     flex-flow: row wrap;
     justify-content: space-evenly;
   }
-  #inv-display li {
-        max-width: 200px;
-        flex: 1 0 auto;
-        text-align: center;
-        height: 250px;
-        display: grid;
-        border-radius: 10px
-  }
-  
-  #inv-display a{
-    height: 150px;
-  }
-    #inv-display h2 {
-        font-size: 1rem;
-    }
-      #inv-display img {
-        border-radius: 10px 10px;
-    }
 
-    #inv-display div {
-        width: 100%;
-        height: 100px;
-    }
+  #inv-display li {
+    max-width: 200px;
+    flex: 1 0 auto;
+    height: 250px;
+    display: grid;
+  }
+
+  #inv-display img {
+    border-radius: 10px 10px;
+  }
 
   #detail-container {
     grid-template-columns: 1fr 1fr;
@@ -297,4 +321,4 @@ hr {
   .detail-image {
     width: 100%;
   }
-  }
+}
