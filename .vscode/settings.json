@@ -10,7 +10,7 @@
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "name": "render.com",
+            "name": "cse340realfast",
             "connectString": "postgresql://cse340realfast:uThFXo9hU9Y83RI1xL6FMtIFGu4pNoVJ@dpg-d4doankhg0os73a8eh9g-a.oregon-postgres.render.com/cse340realfast"
         }
     ]
