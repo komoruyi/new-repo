@@ -1,0 +1,45 @@
+<div class="admin-form-wrapper">
+    <h1>Add Inventory Item</h1>
+  
+    <% if (message && message.length > 0) { %>
+      <p class="notice"><%= message %></p>
+    <% } %>
+  
+    <form action="/inv/add-inventory" method="POST">
+      <label for="classificationList">Classification:</label>
+      <%- classificationList %>
+  
+      <label for="inv_make">Make:</label>
+      <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required>
+  
+      <label for="inv_model">Model:</label>
+      <input type="text" id="inv_model" name="inv_model" value="<%= inv_model %>" required>
+  
+      <label for="inv_year">Year:</label>
+      <input type="number" id="inv_year" name="inv_year" value="<%= inv_year %>" required>
+  
+      <label for="inv_description">Description:</label>
+      <textarea id="inv_description" name="inv_description" required><%= inv_description %></textarea>
+  
+      <label for="inv_price">Price:</label>
+      <input type="number" id="inv_price" name="inv_price" value="<%= inv_price %>" required>
+  
+      <label for="inv_miles">Miles:</label>
+      <input type="number" id="inv_miles" name="inv_miles" value="<%= inv_miles %>" required>
+  
+      <label for="inv_color">Color:</label>
+      <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
+  
+      <label for="inv_image">Image Path:</label>
+      <input type="text" id="inv_image" name="inv_image" value="<%= inv_image %>">
+  
+      <label for="inv_thumbnail">Thumbnail Path:</label>
+      <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>">
+  
+      <% if (errors) { errors.array().forEach(err => { %>
+        <p class="error"><%= err.msg %></p>
+      <% }) } %>
+  
+      <button type="submit">Add Inventory</button>
+    </form>
+  </div>

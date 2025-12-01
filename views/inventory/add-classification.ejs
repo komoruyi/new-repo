@@ -1,0 +1,35 @@
+<div class="admin-form-wrapper">
+    <h1>Add Classification</h1>
+  
+    <% if (message && message.length > 0) { %>
+      <p class="notice"><%= message %></p>
+    <% } %>
+  
+    <form action="/inv/add-classification" method="POST">
+      <label for="classification_name">Classification Name:</label>
+      <input type="text" name="classification_name" id="classification_name" value="<%= classification_name %>" required>
+  
+      <% if (errors) { errors.array().forEach(err => { %>
+        <p class="error"><%= err.msg %></p>
+      <% }) } %>
+  
+      <button type="submit">Add Classification</button>
+    </form>
+  </div><div class="admin-form-wrapper">
+    <h1>Add Classification</h1>
+  
+    <% if (message && message.length > 0) { %>
+      <p class="notice"><%= message %></p>
+    <% } %>
+  
+    <form action="/inv/add-classification" method="POST">
+      <label for="classification_name">Classification Name:</label>
+      <input type="text" name="classification_name" id="classification_name" value="<%= classification_name %>" required>
+  
+      <% if (errors) { errors.array().forEach(err => { %>
+        <p class="error"><%= err.msg %></p>
+      <% }) } %>
+  
+      <button type="submit">Add Classification</button>
+    </form>
+  </div>

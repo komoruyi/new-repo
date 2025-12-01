@@ -230,6 +230,166 @@ hr {
   margin-bottom: 1rem;
 }
 
+/* ===========================
+   LOGIN & REGISTER FORM STYLES
+   =========================== */
+.form {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border: 2px solid var(--main-accent);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  color: #242333;
+}
+
+.form input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-size: 1rem;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--main-accent);
+  box-shadow: 0 0 4px rgba(1,176,211,0.4);
+}
+
+.form input:required:invalid{
+  border-color: #a10000;
+}
+.form input:valid{
+  border-color: #00bc00;
+}
+.submitBtn,
+.form button {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--main-accent);
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submitBtn:hover,
+.form button:hover {
+  opacity: 0.85;
+}
+
+.notice {
+  /* background: #ffe208; */
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #a10000;
+  
+}
+
+/* ============================
+   ADMIN FORMS: ADD CLASS + ADD INVENTORY
+   ============================ */
+
+.admin-form-wrapper {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border: 2px solid var(--main-accent);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.admin-form-wrapper h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: var(--primary-text);
+  border-left: 6px solid var(--main-accent);
+  padding-left: 0.5rem;
+}
+
+.admin-form-wrapper label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: bold;
+  color: #242333;
+}
+
+.admin-form-wrapper input,
+.admin-form-wrapper textarea,
+.admin-form-wrapper select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #b5b5b5;
+  font-size: 1rem;
+}
+
+.admin-form-wrapper textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.admin-form-wrapper input:focus,
+.admin-form-wrapper textarea:focus,
+.admin-form-wrapper select:focus {
+  outline: none;
+  border-color: var(--main-accent);
+  box-shadow: 0 0 4px rgba(1,176,211,0.4);
+}
+
+.admin-form-wrapper button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--main-accent);
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.admin-form-wrapper button:hover {
+  opacity: 0.85;
+}
+
+/* Notice message */
+.admin-form-wrapper .notice {
+  background: rgba(255, 208, 0, 0.2);
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #ffc400;
+  font-weight: bold;
+}
+
+/* Validation error text */
+.admin-form-wrapper .error {
+  color: #b40000;
+  background: #ffe5e5;
+  padding: 0.6rem;
+  border-left: 5px solid #b40000;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+
 
 @media only screen and (min-width: 768px){
   body {

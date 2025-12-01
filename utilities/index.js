@@ -77,6 +77,24 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
+/* **************************************
+ * Build classification select list for forms
+ *************************************** */
+Util.buildClassificationList = async function (selectedId = 0) {
+  const data = await invModel.getClassifications();
+  let list = '<select name="classification_id" id="classification_id">';
+  list += '<option value="">Select a Classification</option>';
+
+  data.rows.forEach((row) => {
+    const selected = row.classification_id == selectedId ? " selected" : "";
+    list += `<option value="${row.classification_id}"${selected}>${row.classification_name}</option>`;
+  });
+
+  list += "</select>";
+  return list;
+};
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
