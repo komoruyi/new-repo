@@ -1,0 +1,227 @@
+<%
+/*
+  Account Update view
+  Expects:
+    - title (string)
+    - nav (nav data, layout will use it)
+    - client (object with clientId, clientFirstname, clientLastname, clientEmail, accountType)
+    - errors (optional array from validation, each item with .msg)
+    - formData (optional object with submitted values when validation fails)
+    - messages (express-messages helper available as a function)
+*/
+const data = (typeof formData !== "undefined" && formData) ? formData : (typeof client !== "undefined" && client) ? client : {};
+%>
+
+<main class="account-update" id="main-content" tabindex="-1">
+  <h1><%= title %></h1>
+
+  <!-- Flash messages (connect-flash + express-messages) -->
+  <section class="messages">
+    <%- typeof messages === "function" ? messages() : "" %>
+  </section>
+
+  <!-- Validation errors -->
+  <% if (errors && Array.isArray(errors) && errors.length) { %>
+    <section class="validation-errors" aria-live="polite">
+      <h2 class="visually-hidden">Form errors</h2>
+      <ul>
+        <% errors.forEach(function(err) { %>
+          <li><%= err.msg %></li>
+        <% }) %>
+      </ul>
+    </section>
+  <% } %>
+
+  <!-- Account Update Form -->
+  <section aria-labelledby="account-update-heading" class="form-section">
+    <h2 id="account-update-heading">Account Update</h2>
+
+    <form id="account-update-form" action="/account/update" method="POST" novalidate>
+      <!-- Hidden account id -->
+      <input type="hidden" name="account_id" value="<%= data.clientId || '' %>">
+      <input type="hidden" name="clientId" value="<%= data.clientId || '' %>">
+
+      <div class="form-group">
+        <label for="clientFirstname">First name</label>
+        <input
+          id="clientFirstname"
+          name="clientFirstname"
+          type="text"
+          value="<%= typeof data.clientFirstname !== 'undefined' ? data.clientFirstname : '' %>"
+          required
+          minlength="2"
+          maxlength="50"
+          autocomplete="given-name"
+          aria-required="true"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="clientLastname">Last name</label>
+        <input
+          id="clientLastname"
+          name="clientLastname"
+          type="text"
+          value="<%= typeof data.clientLastname !== 'undefined' ? data.clientLastname : '' %>"
+          required
+          minlength="2"
+          maxlength="50"
+          autocomplete="family-name"
+          aria-required="true"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="clientEmail">Email address</label>
+        <input
+          id="clientEmail"
+          name="clientEmail"
+          type="email"
+          value="<%= typeof data.clientEmail !== 'undefined' ? data.clientEmail : '' %>"
+          required
+          maxlength="254"
+          autocomplete="email"
+          aria-required="true"
+        >
+      </div>
+
+      <div class="form-actions">
+        <input type="submit" value="Update account information" class="btn btn-primary">
+      </div>
+    </form>
+  </section>
+
+  <!-- Change Password Form (completely separate from the account update form) -->
+  <section aria-labelledby="change-password-heading" class="form-section">
+    <h2 id="change-password-heading">Change Password</h2>
+
+    <p>
+      Enter a new password below to replace your current password.
+      Password requirements: at least 8 characters, with at least one uppercase letter, one lowercase letter, one number, and one special character.
+    </p>
+
+    <form id="change-password-form" action="/account/update" method="POST" novalidate>
+      <!-- Hidden account id -->
+      <input type="hidden" name="account_id" value="<%= data.clientId || '' %>">
+      <input type="hidden" name="clientId" value="<%= data.clientId || '' %>">
+
+      <!-- Distinguish this submission as password-only on the server -->
+      <input type="hidden" name="action" value="changePassword">
+
+      <div class="form-group">
+        <label for="clientPassword">New password</label>
+        <!--
+          Pattern matches: at least one uppercase, one lowercase, one digit, one special char, min length 8
+          (Server-side validation MUST also enforce the same rules.)
+        -->
+        <input
+          id="clientPassword"
+          name="clientPassword"
+          type="password"
+          minlength="8"
+          required
+          autocomplete="new-password"
+          aria-describedby="passwordHelp"
+          pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+        >
+        <small id="passwordHelp" class="form-hint">
+          Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a special character.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm new password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          minlength="8"
+          required
+          autocomplete="new-password"
+        >
+      </div>
+
+      <div class="form-actions">
+        <input type="submit" value="Change password" class="btn btn-secondary">
+      </div>
+    </form>
+  </section>
+
+  <nav class="account-extra-links" aria-label="Account links">
+    <p><a href="/account">Back to Account Management</a></p>
+  </nav>
+</main>
+
+<!-- Minimal inline stylesheet: move to your CSS file if desired -->
+<style>
+  .account-update { max-width: 720px; margin: 0 auto; padding: 1rem; }
+  .form-section { margin-top: 1.5rem; border-top: 1px solid #e6e6e6; padding-top: 1rem; }
+  .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; }
+  label { font-weight: 600; margin-bottom: .25rem; }
+  input[type="text"], input[type="email"], input[type="password"] {
+    padding: .5rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem;
+  }
+  .form-actions { margin-top: 1rem; }
+  .btn { padding: .5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
+  .btn-primary { background: #0066cc; color: #fff; }
+  .btn-secondary { background: #444; color: #fff; }
+  .validation-errors ul { list-style: disc; margin-left: 1.25rem; color: #b00020; }
+  .form-hint { display: block; margin-top: .25rem; color: #666; font-size: .9rem; }
+  .visually-hidden { position: absolute!important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+</style>
+
+<script>
+  // Client-side checks: password match and basic required enforcement (HTML5 handles required)
+  (function () {
+    const pwdForm = document.getElementById('change-password-form');
+    if (pwdForm) {
+      pwdForm.addEventListener('submit', function (e) {
+        const p1 = document.getElementById('clientPassword').value;
+        const p2 = document.getElementById('confirmPassword').value;
+        if (p1 !== p2) {
+          e.preventDefault();
+          alert('Passwords do not match. Please confirm your new password.');
+          document.getElementById('confirmPassword').focus();
+          return;
+        }
+        // optional: ensure pattern matches before submit (some browsers enforce pattern automatically)
+        const pattern = new RegExp(document.getElementById('clientPassword').getAttribute('pattern'));
+        if (!pattern.test(p1)) {
+          e.preventDefault();
+          alert('Password does not meet requirements. See helper text for details.');
+          document.getElementById('clientPassword').focus();
+          return;
+        }
+      });
+    }
+
+    // Client-side validation for update form (HTML5 required/minlength will handle most browsers)
+    const updateForm = document.getElementById('account-update-form');
+    if (updateForm) {
+      updateForm.addEventListener('submit', function (e) {
+        const first = document.getElementById('clientFirstname');
+        const last = document.getElementById('clientLastname');
+        const email = document.getElementById('clientEmail');
+
+        if (!first.value.trim() || first.value.trim().length < 2) {
+          e.preventDefault();
+          alert('Please provide a first name (at least 2 characters).');
+          first.focus();
+          return;
+        }
+        if (!last.value.trim() || last.value.trim().length < 2) {
+          e.preventDefault();
+          alert('Please provide a last name (at least 2 characters).');
+          last.focus();
+          return;
+        }
+        if (!email.value.trim()) {
+          e.preventDefault();
+          alert('Please provide an email address.');
+          email.focus();
+          return;
+        }
+      });
+    }
+  })();
+</script>

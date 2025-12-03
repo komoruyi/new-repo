@@ -1,0 +1,30 @@
+<%
+// Account management view
+// Assumes `client` is available on res.locals (e.g., via lib/setLocals middleware)
+// and has properties: clientFirstname, clientId, accountType
+%>
+
+<main>
+  <% if (client) { %>
+    <h2>Welcome <%= client.clientFirstname || "Basic" %></h2>
+
+    <!-- Update account information link (visible to all logged-in clients) -->
+    <p>
+      <a href="/account/update/<%= client.clientId %>">Update account information</a>
+    </p>
+
+    <% if (client.accountType === "Employee" || client.accountType === "Admin") { %>
+      <!-- Only rendered for Employee/Admin accounts -->
+      <h3>Inventory Management</h3>
+      <p>
+        <!-- Link goes through the MVC flow to the inventory management view -->
+        <a href="/inv">Manage Inventory</a>
+      </p>
+    <% } %>
+
+  <% } else { %>
+    <!-- Fallback if somehow this view is rendered without a client -->
+    <h2>Welcome</h2>
+    <p>Please <a href="/account/login">log in</a> to manage your account.</p>
+  <% } %>
+</main>

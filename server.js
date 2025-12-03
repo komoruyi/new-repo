@@ -17,7 +17,7 @@ const utilities = require("./utilities/");
 const session = require("express-session");
 const pool = require("./database/");
 const accountRoute  = require("./routes/accountRoute")
-
+const setLocals = require("./lib/setLocals"); // <-- require the middleware here
 
 /* ***********************
  * Middleware
@@ -42,6 +42,10 @@ app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+// Register the setLocals middleware AFTER session middleware so it can read req.session
+// This exposes `loggedin` and `client` to all views (res.locals.loggedin, res.locals.client)
+app.use(setLocals);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

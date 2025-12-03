@@ -44,6 +44,136 @@ invCont.buildDetailView = async function (req, res, next) {
   }
 };
 
+/**
+ * buildEditInventoryView
+ * Controller to present the "Edit Inventory" view for a given inventory item.
+ * Expects req.params.inv_id to contain the inventory id. Loads the inventory
+ * record and classification list, then renders the edit template.
+ */
+invCont.buildEditInventoryView = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id, 10);
+    if (Number.isNaN(inv_id)) {
+      return res.status(400).render("errors/error", {
+        title: "Bad Request",
+        message: "Invalid inventory id"
+      });
+    }
+
+    const data = await invModel.getVehicleById(inv_id);
+
+    if (!data) {
+      return res.status(404).render("errors/error", {
+        title: "Not Found",
+        message: "Vehicle not found"
+      });
+    }
+
+    const nav = await utilities.getNav();
+    // Pass the current classification_id so the select list can mark it selected
+    const classificationList = await utilities.buildClassificationList(data.classification_id);
+
+    res.render("./inventory/edit-inventory", {
+      title: `Edit ${data.inv_make} ${data.inv_model}`,
+      nav,
+      message: req.flash("notice"),
+      errors: null,
+      classificationList,
+      inv_id: data.inv_id ?? data.invId ?? inv_id,
+      inv_make: data.inv_make ?? "",
+      inv_model: data.inv_model ?? "",
+      inv_year: data.inv_year ?? "",
+      inv_description: data.inv_description ?? "",
+      inv_image: data.inv_image ?? "/images/no-image.png",
+      inv_thumbnail: data.inv_thumbnail ?? "/images/no-image-tn.png",
+      inv_price: data.inv_price ?? "",
+      inv_miles: data.inv_miles ?? "",
+      inv_color: data.inv_color ?? "",
+      classification_id: data.classification_id ?? null,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav();
+
+    const {
+      inv_id: invIdRaw,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+    } = req.body;
+
+    const inv_id = parseInt(invIdRaw, 10);
+
+    // Call model to perform update. Adjust parameter order to match your model signature.
+    const updateResult = await invModel.updateInventory(
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
+
+    // Determine success: support either rowCount (pg) or returned object
+    const success =
+      (updateResult && typeof updateResult.rowCount === "number" && updateResult.rowCount > 0) ||
+      (updateResult && (updateResult.inv_make || updateResult.inv_model));
+
+    if (success) {
+      const make = updateResult?.inv_make ?? inv_make;
+      const model = updateResult?.inv_model ?? inv_model;
+      const itemName = `${make} ${model}`;
+      req.flash("notice", `The ${itemName} was successfully updated.`);
+      return res.redirect("/inv/");
+    }
+
+    // Update failed: re-render edit-inventory with submitted values (sticky)
+    const classificationList = await utilities.buildClassificationList(classification_id);
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("notice", "Sorry, the update failed.");
+    return res.status(501).render("./inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationList,
+      errors: null,
+      message: req.flash("notice"),
+      inv_id: inv_id || invIdRaw,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Intentional 500 error for testing
 invCont.throwError = async function(req, res, next) {
   throw new Error("Intentional server error for testing.");
@@ -55,11 +185,16 @@ invCont.throwError = async function(req, res, next) {
 invCont.buildManagementView = async function (req, res, next) {
   try {
     const nav = await utilities.getNav();
+
+    // Build the classification select list for the management view
+    const classificationSelect = await utilities.buildClassificationList();
+
     const message = req.flash("notice");
     res.render("./inventory/management", {
       title: "Inventory Management",
       nav,
       message,
+      classificationSelect,
     });
   } catch (error) {
     next(error);
@@ -200,6 +335,24 @@ invCont.registerInventory = async function (req, res, next) {
         inv_image: invImg,
         inv_thumbnail: invThumb,
       });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  try {
+    const classification_id = parseInt(req.params.classification_id, 10);
+    const invData = await invModel.getInventoryByClassificationId(classification_id);
+    if (Array.isArray(invData) && invData.length > 0) {
+      return res.json(invData);
+    } else {
+      // Return an empty array if nothing found so client-side can handle it gracefully
+      return res.json([]);
     }
   } catch (error) {
     next(error);

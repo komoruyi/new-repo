@@ -119,4 +119,61 @@ validate.checkInventoryData = async (req, res, next) => {
   next();
 };
 
+/* Alias/semantic helper for update route to reuse same validation rules */
+validate.newInventoryRules = () => {
+  return validate.inventoryRules();
+};
+
+/* **********************************
+ * checkUpdateData
+ * Middleware to validate update input and re-render the edit-inventory view on errors.
+ * Differences from checkInventoryData:
+ * - includes inv_id from req.body in the data object
+ * - renders "Edit <Make> <Model>" title and the edit-inventory view
+ *********************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+  } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList(classification_id);
+
+    // Build title same as edit controller: "Edit <Make> <Model>"
+    const itemName = `${inv_make ?? ""} ${inv_model ?? ""}`.trim();
+    const title = itemName ? `Edit ${itemName}` : "Edit Inventory";
+
+    return res.status(400).render("inventory/edit-inventory", {
+      errors,
+      title,
+      nav,
+      classificationList,
+      inv_id,
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image: inv_image || "/images/no-image.png",
+      inv_thumbnail: inv_thumbnail || "/images/no-image-tn.png",
+      inv_price,
+      inv_miles,
+      inv_color,
+    });
+  }
+  next();
+};
+
 module.exports = validate;

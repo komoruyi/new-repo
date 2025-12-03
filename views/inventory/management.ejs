@@ -1,10 +1,30 @@
 <h1>Inventory Management</h1>
 
-  <% if (message && message.length > 0) { %>
-    <p class="notice"><%= message %></p>
-  <% } %>
+<% if (message && message.length > 0) { %>
+  <p class="notice"><%= message %></p>
+<% } %>
 
-  <ul>
-    <li><a href="/inv/add-classification">Add Classification</a></li>
-    <li><a href="/inv/add-inventory">Add Inventory</a></li>
-  </ul>
+<ul>
+  <li><a href="/inv/add-classification">Add Classification</a></li>
+  <li><a href="/inv/add-inventory">Add Inventory</a></li>
+</ul>
+
+<!-- 1) Heading -->
+<h2>Manage Inventory</h2>
+
+<!-- 2) Instruction paragraph -->
+<p>Select a classification from the list below to see inventory items that belong to that classification.</p>
+
+<!-- 3) Render the classification select list produced by the controller -->
+<div id="classificationContainer">
+  <%- classificationSelect %>
+</div>
+
+<!-- 4) Empty table which the JS will populate -->
+<table id="inventoryDisplay" class="inventory-table"></table>
+
+<!-- 5) Noscript fallback -->
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- Include the client JS for the management view (per your instruction) -->
+<script src="../../js/inventory.js"></script>

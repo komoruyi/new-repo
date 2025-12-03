@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles/main.css" />
+</head>
+<body>
+  <header><%- nav %></header>
+
+  <main class="container">
+    <h1><%= title %></h1>
+
+    <% if (message && message.length) { %>
+      <div class="alert alert-info"><%= message %></div>
+    <% } %>
+
+    <% if (errors && errors.length) { %>
+      <div class="alert alert-error">
+        <ul>
+          <% errors.forEach(function(err) { %>
+            <li><%= err.msg || err.message || err %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <!-- form posts to /inv/update to perform the update -->
+    <form action="/inv/update" method="post" class="inventory-form">
+      <!-- hidden id (also included at bottom for safety) -->
+      <input type="hidden" name="inv_id" value="<%= typeof inv_id !== 'undefined' ? inv_id : '' %>" />
+
+      <!-- classification select (server builds HTML and injects it) -->
+      <div class="form-row">
+        <label for="classification_id">Classification</label>
+        <%- typeof classificationList !== 'undefined' ? classificationList : '' %>
+      </div>
+
+      <div class="form-row">
+        <label for="inv_make">Make</label>
+        <input id="inv_make" name="inv_make" value="<%= typeof inv_make !== 'undefined' ? inv_make : '' %>" required />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_model">Model</label>
+        <input id="inv_model" name="inv_model" value="<%= typeof inv_model !== 'undefined' ? inv_model : '' %>" required />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_year">Year</label>
+        <input id="inv_year" name="inv_year" value="<%= typeof inv_year !== 'undefined' ? inv_year : '' %>" />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_description">Description</label>
+        <textarea id="inv_description" name="inv_description"><%= typeof inv_description !== 'undefined' ? inv_description : '' %></textarea>
+      </div>
+
+      <div class="form-row">
+        <label for="inv_price">Price</label>
+        <input id="inv_price" name="inv_price" value="<%= typeof inv_price !== 'undefined' ? inv_price : '' %>" />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_miles">Miles</label>
+        <input id="inv_miles" name="inv_miles" value="<%= typeof inv_miles !== 'undefined' ? inv_miles : '' %>" />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_color">Color</label>
+        <input id="inv_color" name="inv_color" value="<%= typeof inv_color !== 'undefined' ? inv_color : '' %>" />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_image">Image URL</label>
+        <input id="inv_image" name="inv_image" value="<%= typeof inv_image !== 'undefined' ? inv_image : '/images/no-image.png' %>" />
+      </div>
+
+      <div class="form-row">
+        <label for="inv_thumbnail">Thumbnail URL</label>
+        <input id="inv_thumbnail" name="inv_thumbnail" value="<%= typeof inv_thumbnail !== 'undefined' ? inv_thumbnail : '/images/no-image-tn.png' %>" />
+      </div>
+
+      <div class="form-row form-actions">
+        <button type="submit" class="btn btn-primary">Update Vehicle</button>
+        <a href="/inv/" class="btn btn-secondary">Cancel</a>
+      </div>
+
+      <!-- Hidden primary key for the inventory item (ensures sticky form and allows update) -->
+      <input type="hidden" name="inv_id" value="<%= typeof inv_id !== 'undefined' ? inv_id : '' %>" />
+    </form>
+  </main>
+
+  <footer><!-- footer if needed --></footer>
+</body>
+</html>
